@@ -4,3 +4,5 @@
 ##### I also modified the Docker container so it runs as a non-root user. The user has a UID of 3002 and matches a user on the host system. 
 
 ##### I have no idea what I am doing, so use at your own caution. 
+
+`docker pull clifford64/musicbot:latest`
