@@ -32,6 +32,12 @@ public class FairQueue<T extends Queueable> extends AbstractQueue<T>
 
     protected final Set<Long> set = new HashSet<>();
 
+    public int addEnd(T item)
+    {
+        list.add(item);
+        return list.size()-1;
+    }
+
     @Override
     public int add(T item)
     {
