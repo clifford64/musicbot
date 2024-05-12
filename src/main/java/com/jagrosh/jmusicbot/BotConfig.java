@@ -16,8 +16,8 @@
 package com.jagrosh.jmusicbot;
 
 import com.jagrosh.jmusicbot.entities.Prompt;
-import com.jagrosh.jmusicbot.utils.FormatUtil;
 import com.jagrosh.jmusicbot.utils.OtherUtil;
+import com.jagrosh.jmusicbot.utils.TimeUtil;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.typesafe.config.*;
 import java.io.IOException;
@@ -40,9 +40,11 @@ public class BotConfig
     
     private Path path = null;
     private String token, ytemail, ytpassword, prefix, altprefix, helpWord, playlistsFolder,
-            successEmoji, warningEmoji, errorEmoji, loadingEmoji, searchingEmoji;
+            logLevel, successEmoji, warningEmoji, errorEmoji, loadingEmoji, searchingEmoji,
+            evalEngine;
     private boolean stayInChannel, songInGame, npImages, updatealerts, useEval, dbots;
     private long owner, maxSeconds, aloneTimeUntilStop;
+    private int maxYTPlaylistPages;
     private double skipratio;
     private OnlineStatus status;
     private Activity game;
@@ -88,8 +90,11 @@ public class BotConfig
             songInGame = config.getBoolean("songinstatus");
             npImages = config.getBoolean("npimages");
             updatealerts = config.getBoolean("updatealerts");
+            logLevel= config.getString("loglevel");
             useEval = config.getBoolean("eval");
+            evalEngine = config.getString("evalengine");
             maxSeconds = config.getLong("maxtime");
+            maxYTPlaylistPages = config.getInt("maxYTPlaylistPages");
             aloneTimeUntilStop = config.getLong("alonetimeuntilstop");
             playlistsFolder = config.getString("playlistsfolder");
             aliases = config.getConfig("aliases");
@@ -314,10 +319,20 @@ public class BotConfig
     {
         return updatealerts;
     }
+
+    public String getLogLevel()
+    {
+        return logLevel;
+    }
     
     public boolean useEval()
     {
         return useEval;
+    }
+
+    public String getEvalEngine()
+    {
+        return evalEngine;
     }
     
     public boolean useNPImages()
@@ -329,10 +344,15 @@ public class BotConfig
     {
         return maxSeconds;
     }
+
+    public int getMaxYTPlaylistPages()
+    {
+        return maxYTPlaylistPages;
+    }
     
     public String getMaxTime()
     {
-        return FormatUtil.formatTime(maxSeconds * 1000);
+        return TimeUtil.formatTime(maxSeconds * 1000);
     }
 
     public long getAloneTimeUntilStop()

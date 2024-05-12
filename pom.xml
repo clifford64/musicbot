@@ -57,7 +57,6 @@
             <artifactId>lavaplayer</artifactId>
             <version>0eaeee195f0315b2617587aa3537fa202df07ddc-SNAPSHOT</version>
         </dependency>
-
 	<dependency>
 	    <groupId>com.github.jagrosh</groupId>
 	    <artifactId>JLyrics</artifactId>
